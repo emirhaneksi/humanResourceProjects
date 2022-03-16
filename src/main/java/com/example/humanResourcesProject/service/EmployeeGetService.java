@@ -8,12 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class EmployeeService {
+public class EmployeeGetService {
     @Autowired
     EmployeeRepository employeeRepository;
 
     public Optional<Employee> getEmployee(int id){
-        Optional<Employee> employee = employeeRepository.findById(id);
         return employeeRepository.findById(id);
     }
 }
