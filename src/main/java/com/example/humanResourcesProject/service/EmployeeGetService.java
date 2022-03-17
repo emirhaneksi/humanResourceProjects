@@ -1,6 +1,7 @@
 package com.example.humanResourcesProject.service;
 
 import com.example.humanResourcesProject.entity.Employee;
+import com.example.humanResourcesProject.exception.EmployeeNotFoundException;
 import com.example.humanResourcesProject.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,13 @@ public class EmployeeGetService {
     EmployeeRepository employeeRepository;
 
     public Optional<Employee> getEmployee(int id){
-        return employeeRepository.findById(id);
+        Optional<Employee> employee = employeeRepository.findById(id);
+
+        if (!employee.isPresent()) {
+            throw new EmployeeNotFoundException(id);
+        } else {
+            return employeeRepository.findById(id);
+        }
+
     }
 }
