@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -24,5 +25,5 @@ public class Employee {
     @Column(name = "department")
     private String department;
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDate startDate;
 }

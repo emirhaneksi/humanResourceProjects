@@ -3,9 +3,8 @@ package com.example.humanResourcesProject.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -18,11 +17,11 @@ public class Permission {
     @Column(name = "id")
     private int id;
     @Column(name = "employeeid")
-    private String employeeId;
+    private int employeeId;
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDate startDate;
     @Column(name = "finish_date")
-    private Date finishDate;
+    private LocalDate finishDate;
     @Column(name = "total_day")
     private int totalDay;
 }
