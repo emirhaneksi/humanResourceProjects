@@ -35,14 +35,12 @@ public class PermissionCreateController {
             permission.setTotalDay(10);
             permission.setStartDate(LocalDate.now());
             permission.setFinishDate(LocalDate.now().plusDays(10));
-
-        } else if (calculateYearDifferenceForPermission(id) > 3 && calculateYearDifferenceForPermission(id) < 5) {
+        } else if (calculateYearDifferenceForPermission(id) >= 3 && calculateYearDifferenceForPermission(id) < 5) {
             permission.setEmployeeId(id);
             permission.setTotalDay(15);
             permission.setStartDate(LocalDate.now());
             permission.setFinishDate(LocalDate.now().plusDays(15));
-
-        } else  {
+        } else {
             permission.setEmployeeId(id);
             permission.setTotalDay(20);
             permission.setStartDate(LocalDate.now());
