@@ -22,6 +22,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/permission/create/{id}")
 public class PermissionCreateController {
+
     @Autowired
     PermissionCreateService permissionCreateService;
     @Autowired
@@ -30,9 +31,11 @@ public class PermissionCreateController {
     EmployeeGetAllController employeeGetAllController;
 
     public int calculateYearDifferenceForPermission(int employeeId) {
+
         Optional<Employee> employee = employeeRepository.findById(employeeId);
         LocalDate today = LocalDate.now();
         Period differenceYear = Period.between(employee.get().getStartDate(), today);
+
         return differenceYear.getYears();
     }
 
@@ -44,6 +47,7 @@ public class PermissionCreateController {
         List<Integer> employeeIdList = new ArrayList<Integer>();
 
         try {
+
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/humanresources" , "root" , "root53");
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT employeeid FROM permissions");
@@ -79,7 +83,6 @@ public class PermissionCreateController {
                 permission.setStartDate(LocalDate.now());
                 permission.setFinishDate(LocalDate.now().plusDays(20));
             }
-
         } catch(Exception exception) {
 
             if (!employee.isPresent()) {

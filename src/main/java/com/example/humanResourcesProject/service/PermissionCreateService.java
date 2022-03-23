@@ -11,7 +11,8 @@ public class PermissionCreateService {
     @Autowired
     PermissionRepository permissionRepository;
 
-    public Permission createNewPermission(Permission permission){
+    public Permission createNewPermission(Permission permission) {
         return permissionRepository.save(permission);
     }
+
 }

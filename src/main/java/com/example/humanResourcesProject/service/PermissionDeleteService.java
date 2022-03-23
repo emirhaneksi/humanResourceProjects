@@ -5,11 +5,11 @@ import com.example.humanResourcesProject.exception.PermissionNotFoundException;
 import com.example.humanResourcesProject.repository.PermissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
 public class PermissionDeleteService {
+
     @Autowired
     PermissionRepository permissionRepository;
 
@@ -23,4 +23,5 @@ public class PermissionDeleteService {
         }
 
     }
+
 }

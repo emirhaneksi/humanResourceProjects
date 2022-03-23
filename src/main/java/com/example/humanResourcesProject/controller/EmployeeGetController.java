@@ -5,7 +5,6 @@ import com.example.humanResourcesProject.service.EmployeeGetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController
@@ -17,8 +16,8 @@ public class EmployeeGetController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Employee> getEmployeeById(@PathVariable int id){
+    public Optional<Employee> getEmployeeById(@PathVariable int id) {
         return employeeGetService.getEmployee(id);
-
     }
+
 }

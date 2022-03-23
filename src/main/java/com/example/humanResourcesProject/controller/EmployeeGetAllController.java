@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
 import java.util.List;
 
 @Controller
@@ -21,7 +20,8 @@ public class EmployeeGetAllController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Employee>> listAllEmployees(){
+    public ResponseEntity<List<Employee>> listAllEmployees() {
         return ResponseEntity.ok().body(employeeGetAllService.listAllEmployees());
     }
+
 }
