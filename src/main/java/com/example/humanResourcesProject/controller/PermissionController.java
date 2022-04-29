@@ -5,8 +5,7 @@ import com.example.humanResourcesProject.entity.Permission;
 import com.example.humanResourcesProject.exception.EmployeeNotFoundException;
 import com.example.humanResourcesProject.exception.PermissionAlreadyExistsException;
 import com.example.humanResourcesProject.repository.EmployeeRepository;
-import com.example.humanResourcesProject.service.PermissionCreateService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.humanResourcesProject.service.PermissionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.sql.Connection;
@@ -20,15 +19,24 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/permission/create/{id}")
-public class PermissionCreateController {
+@RequestMapping("/api/v1/permissions")
+public class PermissionController {
 
-    @Autowired
-    PermissionCreateService permissionCreateService;
-    @Autowired
-    EmployeeRepository employeeRepository;
-    @Autowired
-    EmployeeGetAllController employeeGetAllController;
+    private final PermissionService permissionService;
+    private final EmployeeRepository employeeRepository;
+    private final EmployeeController employeeController;
+
+    public PermissionController(PermissionService permissionService, EmployeeRepository employeeRepository, EmployeeController employeeController) {
+        this.permissionService = permissionService;
+        this.employeeController = employeeController;
+        this.employeeRepository = employeeRepository;
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePermission(@PathVariable int id) {
+        permissionService.deletePermission(id);
+    }
 
     public int calculateYearDifferenceForPermission(int employeeId) {
 
@@ -39,7 +47,7 @@ public class PermissionCreateController {
         return differenceYear.getYears();
     }
 
-    @PostMapping
+    @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Permission createPermission(Permission permission, @PathVariable int id) {
 
@@ -90,7 +98,6 @@ public class PermissionCreateController {
             }
         }
 
-        return permissionCreateService.createNewPermission(permission);
+        return permissionService.createNewPermission(permission);
     }
-
 }
