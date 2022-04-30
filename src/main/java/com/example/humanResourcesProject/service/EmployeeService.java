@@ -3,29 +3,23 @@ package com.example.humanResourcesProject.service;
 import com.example.humanResourcesProject.entity.Employee;
 import com.example.humanResourcesProject.exception.EmployeeNotFoundException;
 import com.example.humanResourcesProject.repository.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
-
     public Optional<Employee> getEmployee(int id){
-        Optional<Employee> employee = employeeRepository.findById(id);
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
 
-        if (!employee.isPresent()) {
-            throw new EmployeeNotFoundException(id);
-        } else {
-            return employeeRepository.findById(id);
-        }
-
+        return employeeRepository.findById(id);
     }
 
     public List<Employee> listAllEmployees() {
@@ -33,15 +27,10 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(int id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
 
-        Optional<Employee> employee = employeeRepository.findById(id);
-
-        if (!employee.isPresent()) {
-            throw new EmployeeNotFoundException(id);
-        } else {
-            employeeRepository.deleteById(id);
-        }
-
+        employeeRepository.deleteById(id);
     }
 
     public Employee createNewEmployee(Employee employee) {

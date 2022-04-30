@@ -2,6 +2,7 @@ package com.example.humanResourcesProject.controller;
 
 import com.example.humanResourcesProject.entity.Employee;
 import com.example.humanResourcesProject.service.EmployeeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,14 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/employee/")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/employee")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-
-    EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

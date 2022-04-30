@@ -6,6 +6,7 @@ import com.example.humanResourcesProject.exception.EmployeeNotFoundException;
 import com.example.humanResourcesProject.exception.PermissionAlreadyExistsException;
 import com.example.humanResourcesProject.repository.EmployeeRepository;
 import com.example.humanResourcesProject.service.PermissionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.sql.Connection;
@@ -20,17 +21,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/permissions")
+@RequiredArgsConstructor
 public class PermissionController {
 
     private final PermissionService permissionService;
     private final EmployeeRepository employeeRepository;
-    private final EmployeeController employeeController;
-
-    public PermissionController(PermissionService permissionService, EmployeeRepository employeeRepository, EmployeeController employeeController) {
-        this.permissionService = permissionService;
-        this.employeeController = employeeController;
-        this.employeeRepository = employeeRepository;
-    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -55,11 +50,9 @@ public class PermissionController {
         List<Integer> employeeIdList = new ArrayList<Integer>();
 
         try {
-
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/humanresources" , "root" , "root53");
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT employeeid FROM permissions");
-            System.out.println("Connection successful");
             while(resultSet.next()) {
                 employeeIdList.add(Integer.valueOf(resultSet.getString(1)));
             }
