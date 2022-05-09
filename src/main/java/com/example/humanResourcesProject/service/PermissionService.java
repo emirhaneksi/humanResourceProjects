@@ -17,8 +17,7 @@ public class PermissionService {
     }
 
     public void deletePermission(int id) {
-        Permission permission = permissionRepository.findById(id)
-                .orElseThrow(() -> new PermissionNotFoundException(id));
+        permissionRepository.findById(id).orElseThrow(() -> new PermissionNotFoundException(id));
 
         permissionRepository.deleteById(id);
     }

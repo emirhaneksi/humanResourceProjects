@@ -5,7 +5,6 @@ import com.example.humanResourcesProject.exception.EmployeeNotFoundException;
 import com.example.humanResourcesProject.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +14,8 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    public Optional<Employee> getEmployee(int id){
-        Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new EmployeeNotFoundException(id));
+    public Optional<Employee> getEmployeeById(int id) {
+        employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
 
         return employeeRepository.findById(id);
     }
@@ -27,8 +25,7 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(int id) {
-        Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new EmployeeNotFoundException(id));
+        employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
 
         employeeRepository.deleteById(id);
     }
