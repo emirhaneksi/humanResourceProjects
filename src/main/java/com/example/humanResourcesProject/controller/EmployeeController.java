@@ -16,7 +16,7 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping
+    @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeService.createNewEmployee(employee);
@@ -28,7 +28,7 @@ public class EmployeeController {
         employeeService.deleteEmployee(id);
     }
 
-    @GetMapping
+    @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Employee>> listAllEmployees() {
         return ResponseEntity.ok().body(employeeService.listAllEmployees());
