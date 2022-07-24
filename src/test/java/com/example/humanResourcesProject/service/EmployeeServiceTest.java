@@ -28,8 +28,8 @@ class EmployeeServiceTest {
 
     @Test
     void getEmployeeById() {
-        final int id = 5;
-        final Employee employee = new Employee(id,"Emirhan","Eksi","Software", LocalDate.now());
+        final int id = 1;
+        final Employee employee = new Employee(id,"Emirhan","Eksi","Computer Science", LocalDate.now());
         given(employeeRepository.findById(id)).willReturn(Optional.of(employee));
         final Optional<Employee> expected = employeeService.getEmployeeById(id);
         assertThat(expected).isNotNull();
